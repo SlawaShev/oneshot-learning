@@ -5,7 +5,10 @@ import pickle
 import matplotlib.pyplot as plt
 
 
-train_folder = os.path.join('/root/images_background_small1')
+train_folder = os.path.join('/root/images_background')
+save_path = os.path.join('/root/')
+valpath = os.path.join('/root/images_evaluation')
+
 
 def loadimgs(path,n = 0):
     '''
@@ -48,3 +51,11 @@ def loadimgs(path,n = 0):
     return X,y,lang_dict
 
 X,y,c = loadimgs(train_folder)
+
+with open(os.path.join(save_path,"train.pickle"), "wb") as f:
+	pickle.dump((X,c),f)
+
+
+X,y,c=loadimgs(valpath)
+with open(os.path.join(save_path,"val.pickle"), "wb") as f:
+	pickle.dump((X,c),f)
